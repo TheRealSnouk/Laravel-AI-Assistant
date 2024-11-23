@@ -108,6 +108,6 @@ Modify the prompt templates in `config.yaml` to:
 
 MIT License - feel free to use and modify for your needs.
 
-## ⚠️ Disclaimer
+## ⚠️ DisclaimerS
 
 This is a self-hosted solution using the CodeLlama model. Ensure you comply with the model's license terms and your local regulations regarding AI usage.
