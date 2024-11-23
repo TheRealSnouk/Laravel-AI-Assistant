@@ -1,0 +1,22 @@
+models:
+  - name: laravel-assistant
+    parameters:
+      model: /models/codellama-7b-instruct.Q4_K_M.gguf
+      context_size: 4096
+      threads: 4
+      gpu_layers: 35
+    template:
+      completion:
+        prompt: |-
+          [INST] You are a Laravel expert. Write code for the following Laravel task:
+          ${prompt}
+          
+          Follow these guidelines:
+          - Use Laravel best practices and conventions
+          - Include proper type hints and docblocks
+          - Follow PSR-12 coding standards
+          - Use modern PHP 8+ features where appropriate
+          [/INST]
+      chat:
+        system: You are a Laravel expert AI programming assistant. You specialize in modern PHP development using Laravel framework, following best practices, design patterns, and Laravel conventions.
+        prompt: "[INST] ${prompt} [/INST]"

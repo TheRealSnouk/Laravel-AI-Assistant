@@ -1,0 +1,21 @@
+version: '3.8'
+services:
+  localai:
+    image: localai/localai:latest
+    container_name: laravel-ai-assistant
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./models:/models
+      - ./config.yaml:/config.yaml
+    environment:
+      - DEBUG=true
+      - MODELS_PATH=/models
+      - CONFIG_PATH=/config.yaml
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
