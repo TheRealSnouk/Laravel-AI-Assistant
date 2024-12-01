@@ -1,113 +1,94 @@
 # Laravel AI Assistant
 
-A self-hosted AI coding assistant specialized in Laravel development, powered by CodeLlama and LocalAI.
+A modern, cyberpunk-themed AI coding assistant powered by Anthropic's Claude-2 through Open Router API.
 
-## 🚀 Features
+## Features
 
-- Laravel-specific code generation
-- Runs completely locally - no cloud dependencies
-- Supports modern PHP 8+ and Laravel best practices
-- Generates controllers, models, migrations, and more
-- Follows PSR-12 coding standards
+- Advanced AI Code Assistant using Claude-2
+- Cyberpunk-themed UI with neon aesthetics
+- Real-time chat interactions
+- Seamless API integration
+- Robust error handling
+- Responsive design
 
-## 🖥️ Requirements
+## Technical Stack
 
-- NVIDIA GPU with at least 8GB VRAM (recommended)
-- Docker and Docker Compose
-- PHP 8.1 or higher
-- Composer
-- 8GB RAM minimum
-- 20GB free disk space
+- Laravel 11
+- PHP 8.2+
+- TailwindCSS
+- Open Router API (Claude-2)
 
-## 🛠️ Installation
+## Setup Instructions
 
-1. Clone the repository:
+1. Clone the repository
 ```bash
-git clone https://github.com/yourusername/laravel-ai-assistant
-cd laravel-ai-assistant
+git clone [your-repo-url]
+cd Laravel-AI-Assistant
 ```
 
-2. Install PHP dependencies:
+2. Install dependencies
 ```bash
 composer install
+npm install
 ```
 
-3. Make scripts executable:
+3. Configure environment
 ```bash
-chmod +x setup.sh laravel-assistant.php
+cp .env.example .env
+php artisan key:generate
 ```
 
-4. Run the setup script (downloads model and starts the service):
+4. Set up Open Router API
+- Get your API key from https://openrouter.ai/keys
+- Add to your .env file:
+```
+OPENROUTER_API_KEY=your_api_key_here
+```
+
+5. Start the development server
 ```bash
-./setup.sh
+php artisan serve
 ```
 
-## 💻 Usage
+## Recent Updates (2024-03-19)
 
-Generate Laravel code using natural language prompts:
+### API Integration
+- Migrated to Open Router API
+- Implemented Claude-2 model support
+- Added flexible model selection
+- Improved error handling and logging
 
-```bash
-php laravel-assistant.php "Create a User model with email verification"
-```
+### Frontend Enhancements
+- Added cyberpunk-themed UI
+- Implemented real-time chat interface
+- Added typing indicators
+- Improved message formatting
+- Enhanced responsive design
 
-## 📝 Example Prompts
+### Controller Improvements
+- Refactored AIAssistantController
+- Added shared request handling
+- Improved error management
+- Enhanced response processing
 
-Check `example-prompts.md` for more usage examples, including:
-- Model generation
-- Controller creation
-- Database migrations
-- API resources
-- Form requests
-- Service classes
-- Unit tests
+## Usage
 
-## 🔧 Configuration
+1. Start the development server
+2. Navigate to http://localhost:8000
+3. Begin chatting with the AI assistant
+4. Use Shift+Enter for multi-line messages
 
-- Edit `config.yaml` to adjust model parameters
-- Modify `docker-compose.yml` for container settings
-- Update prompts in `config.yaml` for different coding styles
+## Security
 
-## 📚 Project Structure
+- API keys are properly secured
+- CSRF protection implemented
+- Input validation in place
+- Secure error handling
 
-```
-.
-├── config.yaml           # LocalAI and model configuration
-├── docker-compose.yml    # Docker services configuration
-├── setup.sh             # Installation script
-├── laravel-assistant.php # PHP client for the AI service
-├── composer.json        # PHP dependencies
-├── models/              # AI model storage
-└── example-prompts.md   # Usage examples
-```
+## Contributing
 
-## ⚙️ Advanced Configuration
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-### Adjusting Model Parameters
+## License
 
-In `config.yaml`:
-- `context_size`: Adjust for longer code generation (default: 4096)
-- `threads`: CPU threads to use (default: 4)
-- `gpu_layers`: GPU acceleration layers (default: 35)
-
-### Custom Prompts
-
-Modify the prompt templates in `config.yaml` to:
-- Change coding style
-- Add specific conventions
-- Include custom documentation formats
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create your feature branch
-3. Commit your changes
-4. Push to the branch
-5. Create a Pull Request
-
-## 📄 License
-
-MIT License - feel free to use and modify for your needs.
-
-## ⚠️ DisclaimerS
-
-This is a self-hosted solution using the CodeLlama model. Ensure you comply with the model's license terms and your local regulations regarding AI usage.
+This project is open-sourced software licensed under the MIT license.
