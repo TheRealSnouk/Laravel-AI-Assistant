@@ -14,6 +14,9 @@ export default {
         'cyber-pink': '#FF00F5',
         'cyber-green': '#00FF9F',
         'cyber-yellow': '#FFE600',
+        'hedera': '#222222',
+        'paypal': '#003087',
+        'stripe': '#635BFF',
       },
       fontFamily: {
         'jetbrains': ['JetBrains Mono', 'monospace'],
@@ -22,6 +25,7 @@ export default {
       animation: {
         'cyber-pulse': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
         'cyber-glow': 'glow 2s ease-in-out infinite alternate',
+        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
       },
       keyframes: {
         glow: {
@@ -31,5 +35,7 @@ export default {
       }
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/forms'),
+  ],
 }

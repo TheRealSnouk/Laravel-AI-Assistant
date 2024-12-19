@@ -1,21 +1,56 @@
-version: '3.8'
+version: '3'
+
 services:
-  localai:
-    image: localai/localai:latest
-    container_name: laravel-ai-assistant
-    ports:
-      - "8080:8080"
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: laravel-ai-assistant
+    container_name: laravel-app
+    restart: unless-stopped
+    working_dir: /var/www/
     volumes:
-      - ./models:/models
-      - ./config.yaml:/config.yaml
+      - .:/var/www
+    networks:
+      - laravel-network
+
+  nginx:
+    image: nginx:alpine
+    container_name: laravel-nginx
+    restart: unless-stopped
+    ports:
+      - "8000:80"
+    volumes:
+      - .:/var/www
+      - ./docker/nginx/:/etc/nginx/conf.d/
+    networks:
+      - laravel-network
+
+  db:
+    image: mysql:8.0
+    container_name: laravel-db
+    restart: unless-stopped
     environment:
-      - DEBUG=true
-      - MODELS_PATH=/models
-      - CONFIG_PATH=/config.yaml
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: 1
-              capabilities: [gpu]
+      MYSQL_DATABASE: laravel
+      MYSQL_ROOT_PASSWORD: PotPot#420
+      MYSQL_PASSWORD: Potpot420
+      MYSQL_USER: snouk
+    volumes:
+      - dbdata:/var/lib/mysql
+    networks:
+      - laravel-network
+
+  stripe-cli:
+    image: stripe/stripe-cli:latest
+    container_name: stripe-cli
+    command: "listen --api-key ${STRIPE_SECRET_KEY} --forward-to http://laravel-app:80/api/stripe/webhook"
+    networks:
+      - laravel-network
+
+networks:
+  laravel-network:
+    driver: bridge
+
+volumes:
+  dbdata:
+    driver: local

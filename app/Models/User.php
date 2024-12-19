@@ -6,6 +6,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\Subscription;
+use App\Models\CryptoPayment;
+use App\Models\ApiCall;
 
 class User extends Authenticatable
 {
@@ -21,6 +24,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'is_admin',
+        'last_active_at'
     ];
 
     /**
@@ -34,15 +39,33 @@ class User extends Authenticatable
     ];
 
     /**
-     * Get the attributes that should be cast.
+     * The attributes that should be cast.
      *
-     * @return array<string, string>
+     * @var array<string, string>
      */
-    protected function casts(): array
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+        'last_active_at' => 'datetime',
+        'is_admin' => 'boolean'
+    ];
+
+    public function subscription()
     {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
+        return $this->hasOne(Subscription::class)->latest();
+    }
+
+    public function subscriptionHistory()
+    {
+        return $this->hasMany(Subscription::class);
+    }
+
+    public function cryptoPayments()
+    {
+        return $this->hasMany(CryptoPayment::class);
+    }
+
+    public function apiCalls()
+    {
+        return $this->hasMany(ApiCall::class);
     }
 }
