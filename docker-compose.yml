@@ -1,54 +1,47 @@
 version: '3'
-
 services:
   app:
     build:
       context: .
       dockerfile: Dockerfile
-    image: laravel-ai-assistant
-    container_name: laravel-app
+    container_name: laravel_app
     restart: unless-stopped
-    working_dir: /var/www/
+    working_dir: /var/www
     volumes:
-      - .:/var/www
+      - ./:/var/www
     networks:
-      - laravel-network
+      - laravel_net
+
+  db:
+    image: mysql:8.0
+    container_name: laravel_db
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: laravel
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_PASSWORD: password
+      MYSQL_USER: laravel
+      MYSQL_ROOT_HOST: '%'
+    command: --default-authentication-plugin=mysql_native_password
+    volumes:
+      - dbdata:/var/lib/mysql
+    networks:
+      - laravel_net
 
   nginx:
     image: nginx:alpine
-    container_name: laravel-nginx
+    container_name: laravel_nginx
     restart: unless-stopped
     ports:
       - "8000:80"
     volumes:
-      - .:/var/www
-      - ./docker/nginx/:/etc/nginx/conf.d/
+      - ./:/var/www
+      - ./docker/nginx:/etc/nginx/conf.d
     networks:
-      - laravel-network
-
-  db:
-    image: mysql:8.0
-    container_name: laravel-db
-    restart: unless-stopped
-    environment:
-      MYSQL_DATABASE: laravel
-      MYSQL_ROOT_PASSWORD: PotPot#420
-      MYSQL_PASSWORD: Potpot420
-      MYSQL_USER: snouk
-    volumes:
-      - dbdata:/var/lib/mysql
-    networks:
-      - laravel-network
-
-  stripe-cli:
-    image: stripe/stripe-cli:latest
-    container_name: stripe-cli
-    command: "listen --api-key ${STRIPE_SECRET_KEY} --forward-to http://laravel-app:80/api/stripe/webhook"
-    networks:
-      - laravel-network
+      - laravel_net
 
 networks:
-  laravel-network:
+  laravel_net:
     driver: bridge
 
 volumes:
