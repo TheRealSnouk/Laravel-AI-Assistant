@@ -1,3 +1,4 @@
+console.log('App.js loaded');
 import './bootstrap';
 import Alpine from 'alpinejs';
 import { walletHandlers } from './wallets';

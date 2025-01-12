@@ -38,21 +38,6 @@
                     </div>
                 </div>
             @endauth
-            
-            <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h3 class="text-xl font-semibold mb-3">Code Completion</h3>
-                    <p class="text-gray-600">Get intelligent code suggestions as you type, powered by advanced AI models.</p>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h3 class="text-xl font-semibold mb-3">Code Review</h3>
-                    <p class="text-gray-600">Receive instant feedback and suggestions to improve your code quality.</p>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h3 class="text-xl font-semibold mb-3">Security Analysis</h3>
-                    <p class="text-gray-600">Identify potential security vulnerabilities in your code automatically.</p>
-                </div>
-            </div>
         </main>
     </div>
 </body>
