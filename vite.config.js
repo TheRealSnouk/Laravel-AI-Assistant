@@ -8,4 +8,9 @@ export default defineConfig({
             refresh: true,
         }),
     ],
+    server: {
+        headers: {
+            'Content-Security-Policy': "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://fonts.bunny.net; style-src 'self' 'unsafe-inline' https://fonts.bunny.net; font-src 'self' https://fonts.bunny.net; img-src 'self' data:;",
+        },
+    }
 });

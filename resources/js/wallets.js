@@ -59,7 +59,7 @@ export const walletHandlers = {
                     symbol: 'ETH',
                     decimals: 18
                 },
-                rpcUrls: ['https://mainnet.infura.io/v3/YOUR-PROJECT-ID'],
+                rpcUrls: ['https://mainnet.infura.io/v3/YOUR_INFURA_PROJECT_ID'],
                 blockExplorerUrls: ['https://etherscan.io']
             },
             '0x38': {

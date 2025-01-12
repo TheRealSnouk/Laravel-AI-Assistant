@@ -10,6 +10,8 @@ RUN apt-get update && apt-get install -y \
     zip \
     unzip \
     default-mysql-client \
+    nodejs \
+    npm \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install PHP extensions
@@ -24,7 +26,11 @@ WORKDIR /var/www
 # Copy existing application directory contents with correct ownership
 COPY --chown=www-data:www-data . /var/www
 
-# Install dependencies
+# Install Node dependencies and build assets
+RUN npm install
+RUN npm run build
+
+# Install PHP dependencies
 RUN composer install --no-interaction --optimize-autoloader --no-scripts
 
 # Change current user to www
