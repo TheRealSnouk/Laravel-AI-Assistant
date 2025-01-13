@@ -26,6 +26,10 @@ WORKDIR /var/www
 # Copy existing application directory contents with correct ownership
 COPY --chown=www-data:www-data . /var/www
 
+# Set correct permissions for the application directory
+RUN find /var/www -type d -exec chmod 755 {} \;
+RUN find /var/www -type f -exec chmod 644 {} \;
+
 # Install Node dependencies and build assets
 RUN npm install
 RUN npm run build
